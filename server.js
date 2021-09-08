@@ -5,10 +5,10 @@ const fs = require("fs")
 const express = require("express")
 const app = express()
 
-const bucketName = "mjunction-digital-asset";
+const bucketName = "xxxxxxxxxxx";
 const awsConfig = {
-  accessKeyId: "AKIAWTU5HR2DQH5TBOFK",
-  secretAccessKey: "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",
+  accessKeyId: "xxxxxxx",
+  secretAccessKey: "xxxxxxxxxxx",
   region: "us-east-1",
 };
 
