@@ -1,45 +1,14 @@
-const { nanoid } = require("nanoid");
-const pdf = require('./app')
-const AWS = require("aws-sdk");
-const fs = require("fs")
-const express = require("express")
-const app = express()
-
-const bucketName = "xxxxxxxxxxx";
-const awsConfig = {
-  accessKeyId: "xxxxxxx",
-  secretAccessKey: "xxxxxxxxxxx",
-  region: "us-east-1",
-};
-
-const S3 = new AWS.S3(awsConfig);
-
-app.get('/', (req,res) => {
-    pdf();
-
-    //save pdf to s3 bucket
-    const fileStream = fs.createReadStream('mydoc.pdf');
-    let type = "pdf";
-    const params = {
-      Bucket: bucketName,
-      Key: `new_pdf/${nanoid()}.${type}`,
-      Body: fileStream,
-    
-      ContentType: "application/pdf",
-    };
-    
-    S3.upload(params, (err, data) => {
-      if (err) {
-        console.log(err);
-        return res.sendStatus(400);
-      }
-      console.log(data);
-      res.send("uploaded to s3")
-    });
-})
+const pdf = require("./app");
+const express = require("express");
+const app = express();
 
 
-app.listen(2000, () => {
-    console.log("server is running")
-})
 
+app.get("/", async (req, res) => {
+  pdf();
+  res.send("ok");
+});
+
+app.listen(1000, () => {
+  console.log("server is running");
+});
